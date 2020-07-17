@@ -1,12 +1,13 @@
-export type Question = {
-    category: string;
-    correct_answer: string;
-    difficulty: string;
-    incorrect_answer: string[];
-    question: string;
-    type: string;
+import { shuffleArray } from './utils';
 
-}
+export type Question = {
+  category: string;
+  correct_answer: string;
+  difficulty: string;
+  incorrect_answers: string[];
+  question: string;
+  type: string;
+};
 //combine correct_answer and incorrect_answers into one array to map in UI
 export type QuestionState = Question & { answers: string[] };
 
@@ -33,10 +34,11 @@ export const fetchQuizQuestions = async (
 ) => {
   const endpoint = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
   const data = await (await fetch(endpoint)).json();
-    return data.results.map((question: Question) => (
-        {
-            ...question,
-            answer:
-      }
-  ))
+  return data.results.map((question: Question) => ({
+    ...question,
+    answers: shuffleArray([
+      ...question.incorrect_answers,
+      question.correct_answer,
+    ]),
+  }));
 };
