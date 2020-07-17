@@ -6,22 +6,45 @@ import { fetchQuizQuestions } from './API';
 // Components
 import QuestionCard from './components/QuestionCard';
 // Types
-import { Difficulty, Category } from './API';
+import { QuestionState, Difficulty, Category } from './API';
+
+type AnswerObject = {
+  question: string;
+  answer: string;
+  correct: boolean;
+  correctAnswer: string;
+};
+
 const TOTAL_QUESTIONS = 10;
 
 const App = () => {
   const [loading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
+  const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameover, setGameover] = useState(true);
 
   console.log(
     fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY, Category.CELEBRITIES)
   );
+  // put some error handling here try catch block
+  const startQuiz = async () => {
+    setLoading(true);
+    setGameover(false);
 
-  const startQuiz = async () => {};
+    const newQuestions = await fetchQuizQuestions(
+      TOTAL_QUESTIONS,
+      Difficulty.EASY,
+      Category.CELEBRITIES
+    );
+    setQuestions(newQuestions);
+    // reset game
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
+  };
 
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
 
