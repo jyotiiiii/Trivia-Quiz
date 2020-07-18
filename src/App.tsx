@@ -83,7 +83,7 @@ const App = () => {
       ) : null}
 
       {!gameover || userAnswers.length === TOTAL_QUESTIONS ? (
-        <p className="score">Score:</p>
+        <p className="score">Score: {score}</p>
       ) : null}
       {/* && is short circuit for ternary where false returns null */}
       {loading && <p className="">Loading Questions...</p>}
