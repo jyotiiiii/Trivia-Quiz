@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
-import BGImage from './images/rahul-pandit.jpg';
+import BGImage from './images/julien-borean-unsplash.jpg';
 
 export const GlobalStyle = createGlobalStyle`
     html {
@@ -30,8 +30,12 @@ export const Wrapper = styled.div`
     color: white;
   }
 
+  .loading {
+    color: #6eafb4;
+  }
+
   .score {
-    color: #fff;
+    color: #6eafb4;
     font-size: 2rem;
     margin: 0;
   }

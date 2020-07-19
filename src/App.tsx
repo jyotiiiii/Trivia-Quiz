@@ -36,7 +36,7 @@ const App = () => {
     const newQuestions = await fetchQuizQuestions(
       TOTAL_QUESTIONS,
       Difficulty.EASY,
-      Category.CELEBRITIES
+      Category.FILM
     );
     setQuestions(newQuestions);
     // reset game
@@ -90,7 +90,7 @@ const App = () => {
           <p className="score">Score: {score}</p>
         ) : null}
         {/* && is short circuit for ternary where false returns null */}
-        {loading && <p className="">Loading Questions...</p>}
+        {loading && <p className="loading">Loading Questions...</p>}
         {!loading && !gameover && (
           <QuestionCard
             questionNr={number + 1}
